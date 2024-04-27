@@ -7,7 +7,7 @@ public class Main {
     public static BlockingQueue<String> queueA = new ArrayBlockingQueue<>(100);
     public static BlockingQueue<String> queueB = new ArrayBlockingQueue<>(100);
     public static BlockingQueue<String> queueC = new ArrayBlockingQueue<>(100);
-g
+
     public static void main(String[] args) throws InterruptedException {
         Thread thread = new Thread(() -> {
             try {
