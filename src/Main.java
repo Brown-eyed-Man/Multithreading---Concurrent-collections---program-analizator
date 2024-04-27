@@ -3,24 +3,26 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 public class Main {
-    public static int textQuantity = 10_000;
+    public static int textQuantity = 100;
     public static BlockingQueue<String> queueA = new ArrayBlockingQueue<>(100);
     public static BlockingQueue<String> queueB = new ArrayBlockingQueue<>(100);
     public static BlockingQueue<String> queueC = new ArrayBlockingQueue<>(100);
+    public static Thread textGenerator;
 
     public static void main(String[] args) throws InterruptedException {
-        Thread thread = new Thread(() -> {
+        textGenerator = new Thread(() -> {
             try {
                 for (int i = 0; i < textQuantity; i++) {
-                    queueA.put(generateText("abc", 100_000));
-                    queueB.put(generateText("abc", 100_000));
-                    queueC.put(generateText("abc", 100_000));
+                    String text = generateText("abc", 100_000);
+                    queueA.put(text);
+                    queueB.put(text);
+                    queueC.put(text);
                 }
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         });
-        thread.start();
+        textGenerator.start();
 
         Thread threadA = createThread(queueA, 'a');
         Thread threadB = createThread(queueB, 'b');
