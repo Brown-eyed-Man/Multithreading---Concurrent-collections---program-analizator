@@ -65,6 +65,7 @@ public class Main {
             }
             if (counter > max) {
                 max = counter;
+                counter = 0;
             }
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
